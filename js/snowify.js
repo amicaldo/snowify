@@ -14,15 +14,15 @@
     const snowflakes = [];
 
     /* Configuration */
-    const INTENSITY     = 0.5;  /* The intensity scale of snowflake creation */
+    const INTERVAL      = 10;   /* The interval of render calls */
+    const INTENSITY     = 0.3;  /* The intensity scale of snowflake creation */
     const MIN_INTENSITY = 15;   /* The min intensity of snowflake creation */
     const MAX_INTENSITY = 40;   /* The max intensity of snowflake creation */
-    const INTERVAL      = 10;   /* The interval of render calls */
-    const MIN_VEL_X     = 0.3;  /* The min falling speed of a snowflake */
-    const MAX_VEL_X     = 0.5;  /* The max falling speed of a snowflake */
-    const MIN_VEL_Y     = -0.2; /* The min wind of a snowflake */
-    const MAX_VEL_Y     = 0.2;  /* The max wind of a snowflake */
-    const MIN_SIZE      = 3;    /* The min size of a snowflake */
+    const MIN_VEL_Y     = 0.3;  /* The min falling speed of a snowflake */
+    const MAX_VEL_Y     = 0.5;  /* The max falling speed of a snowflake */
+    const MIN_VEL_X     = -0.2; /* The min wind of a snowflake */
+    const MAX_VEL_X     = 0.2;  /* The max wind of a snowflake */
+    const MIN_SIZE      = 4;    /* The min size of a snowflake */
     const MAX_SIZE      = 12;   /* The max size of a snowflake */
     const IMAGE_URLS    = [
         'https://download.amicaldo.net/scripts/snow/images/snowflake01.png',
@@ -31,8 +31,8 @@
         'https://download.amicaldo.net/scripts/snow/images/snowflake04.png'
     ];
 
-    /* Dynamically adapt snowflake creation to screen size */
-    var MAX_RENDER_COUNT;
+    /* Dynamically adjust snowflake creation to screen size */
+    let MAX_RENDER_COUNT;
 
     const Snowflake = (function() {
         let snowflake = new Image();
@@ -40,9 +40,9 @@
         snowflake.data = {
             x  : Math.random() * window.innerWidth,
             y  : -1 * MAX_SIZE,
-            r  : MIN_SIZE  + Math.random() * MAX_SIZE,
-            vx : MIN_VEL_Y + Math.random() * (MAX_VEL_Y * 2),
-            vy : MIN_VEL_X + Math.random() * MAX_VEL_X
+            vx : MIN_VEL_X + Math.random() * (MAX_VEL_X - MIN_VEL_X),
+            vy : MIN_VEL_Y + Math.random() * (MAX_VEL_Y - MIN_VEL_Y),
+            r  : MIN_SIZE  + Math.random() * (MAX_SIZE  - MIN_SIZE)
         };
 
         snowflake.src = IMAGE_URLS[(Math.floor(Math.random() * IMAGE_URLS.length))];
